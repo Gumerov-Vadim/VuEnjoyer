@@ -1,123 +1,50 @@
 <template>
-    <div class="comment">
-        <div class="comment_author">
-            <div class="user">
-                <div class="avatar"></div>
-                <div class="name">Lorem, ipsum.</div>
-            </div>
-        </div>
-        <div class="comment_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, modi.</div>
-        <div class="comment_rating">
-            <div class="reply">Ответить</div>
-            <div class="rating">
-                <div class="like_counter">{{like_counter}}</div>
-                <div @click="LikeClicked" class="like_button">
-                <div v-if="!isLiked" class="like white_like"></div>
-                <div v-else class="like green_like"></div>
-                </div>
-            </div>
-        </div>
-       
+<div class="comment_input">
+    <div class="comment_header">
+        Оставьте комментарий!
     </div>
+    <input type="text">
+    <div class="send">
+        <div class="send_text">Отправить!</div>
+        <div class="send_icon"></div>
+    </div>
+</div>   
 </template>
-
-<script>
-export default{
-    data(){
-        return{
-            isLiked:false,
-            like_counter:10
-        }
-    },
-    methods:{
-        LikeClicked(){
-            if(this.isLiked===true){
-                this.like_counter--;
-                this.isLiked=false;
-            }
-            else{
-                this.like_counter++;
-                this.isLiked=true;
+    
+    <script>
+    export default{
+        data(){
+            return{
             }
         }
     }
-}
-</script>
-
-<style>
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.comment{
-    border:#9d9 5px solid;
-    margin: 15px;
-    padding: 10px;
-    min-width:300px;
-    width: max-content;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(66, 66, 66);
-    color: white;
-}
-.comment_author{
-    border-bottom:#9d9 1px solid;
-    font-size: 28px;
-}
-.comment_rating{
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 24px;
-}
-.comment_content{
-    font-size: 20px;
-}
-.like{
-    width: 35px;
-    height: 35px;
-    position: absolute;
-}
-.white_like{
-    background-image: url(../../мусорка/white_like.png);
-    background-size: cover;
-}
-.green_like{
-    background-image: url(../../мусорка/green_like.png);
-    background-size: cover;
-}
-.reply{
-    position: relative;
-    display: flex;
-    flex-direction: column-reverse;
-    cursor: pointer;
-    user-select: none;
-}
-.reply::after{
-    content: "";
-    position: absolute;
-    background-image: url(../../мусорка/reply.png);
-    background-size: 35px 35px;
-    height: 35px;
-    width: 35px;
-    right: -40px;
-    bottom: 0px;
-}
-.rating{
-    display: flex;
-    align-items: flex-end;
-}
-.like_button{
-    position: relative;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-}
-.like_counter{
-    margin-right: 5px;
-    user-select: none;
-}
-</style>
+    </script>
+    
+    <style scoped>
+    .comment_input{
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        padding: 10px;
+        background-color: #8DDCB8;
+    }
+    input{
+        background-color: #8DDCB8;
+    }
+    .send{
+        color:#71DCAB;
+        background-color: #15784B;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .send_icon{
+        height: 26px;
+        width: 26px;
+        background-size: cover;
+        background-image: url(@/img/send.png);
+    }
+    *{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    </style>
