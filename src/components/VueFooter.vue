@@ -3,10 +3,16 @@
     <div class="footer_content">
         <div class="title">our contacts</div>
         <div v-for="contact in contacts" class="contact">
-            <div class="contact_icon"><img v-bind:src="contact.url" :alt="contact.text">{{ contact.text }}</div>
-            <div class="contact_text"></div>
+            <a :href="contact.href" class="contact_card">
+            <img v-bind:src="contact.url" :alt="contact.name">
+            <div class="contact_text">
+                <div class="contact_text_top">{{ contact.name }}</div>
+                <div class="contact_text_bottom">{{ contact.text }}</div>
+            </div>
+        </a>
         </div>
-        <div>All icons by <a target="_blank" href="https://icons8.com">Icons8.</a> Ty!</div>
+
+        <div class="contact">All icons by <a style="color: #75AED6;" target="_blank" href="https://icons8.com">Icons8.</a> Ty!</div>
     </div>
     <div class="footer_footer"></div>
 </footer>
@@ -18,9 +24,9 @@
             return{
                 name:'vue-footer',
                 contacts:[
-                    {url:require("@/img/contacts/github_icon.png"),text:"git hub"},
-                    {url:require("@/img/contacts/mail_icon.png"),text:"mail"},
-                    {url:require("@/img/contacts/phone_icon.png"),text:"phone"}
+                    {url:require("@/img/contacts/github_icon.png"),name:"git hub",text:"my github",href:"https://github.com/"},
+                    {url:require("@/img/contacts/mail_icon.png"),name:"mail",text:"mymail@mail.ru",href:"https://mail.google.com/"},
+                    {url:require("@/img/contacts/phone_icon.png"),name:"phone",text:"88005553535", href:"#"}
                 ]
             }
         }
@@ -46,5 +52,23 @@ footer{
     align-items: center;
     flex-direction: row;
     justify-content: space-around;
+}
+.contact{
+    font-size: 20px;
+}
+.contact_card{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.contact_text_top{
+    color: #4481AD;
+}
+.contact_text_bottom{
+    color: #75AED6;
+}
+a{
+    font-style: normal;
+    text-decoration: none;
 }
 </style>
