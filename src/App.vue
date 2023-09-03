@@ -5,6 +5,7 @@
         <comment-input v-on:send="sendComment"/>
          
         <comment v-bind:comments="comments"/>
+        <vue-footer/>
         </div>
     </div>
 </template>
@@ -13,10 +14,11 @@
     import Comment from "@/components/Comment.vue"
     import CommentInput from "@/components/CommentInput.vue"
     import VuEnjoyerHeader from "@/components/VuEnjoyerHeader.vue"
+    import VueFooter from "./components/VueFooter.vue"
 import { pushScopeId } from "vue"
     export default{
         components:{
-            Comment,CommentInput,VuEnjoyerHeader
+            Comment,CommentInput,VuEnjoyerHeader,VueFooter
         },
         data(){
             return{
