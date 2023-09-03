@@ -8,19 +8,18 @@
         </div>
     </div>
     </header>
-    <div class="test" style="height: 1000px;width: 100px; background-color: orange;"></div>
-    <div class="box" id="About" style="height: 100px;width: 100px;background-color: cyan;"></div>
     </template>
     
     <script>
     export default{
         data(){
             return{
+                name:'vu-enjoyer-header',
                 buttons:[
                     {name:"О нас!",href:"#About"}
                 ]
             }
-        }
+        },
     }
     </script>
     

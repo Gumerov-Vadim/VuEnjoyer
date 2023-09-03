@@ -1,84 +1,42 @@
 <template>
-<div class="comment_input">
-    <div class="comment_header">
-        Оставьте комментарий!
-    </div>
-    <textarea v-bind:value="Content" @input="inputContent" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
-    <div class="comment_footer">
-        <div class="send_button">
-            <div class="send_text">Отправить!</div>
-            <div class="send_icon"></div>
+    <div class="app">
+       <vu-enjoyer-header/>
+       <div class="content">
+        <comment-input/>
+        <comment/>
         </div>
     </div>
-</div>   
 </template>
     
     <script>
     import Comment from "@/components/Comment.vue"
-    import CommentInput from "@/components/Comment.vue"
+    import CommentInput from "@/components/CommentInput.vue"
+    import VuEnjoyerHeader from "@/components/VuEnjoyerHeader.vue"
     export default{
+        components:{
+            Comment,CommentInput,VuEnjoyerHeader
+        },
         data(){
             return{
-                Content:"123"
+                // Content:"123"
             }
         },
         methods:{
-            inputContent(event){
-                console.log(event);
-                this.Content = event.target.value;
-            }
+            // inputContent(event){
+            //     console.log(event);
+            //     this.Content = event.target.value;
+            // }
         }
     }
     </script>
     
-    <style scoped>
-    .comment_input{
-        color: white;
-        display: flex;
-        flex-direction: column;
-        width: 600px;
-        padding: 10px;
-        background-color: #41B882;
-    }
-    textarea{
-        outline : none;
-        resize: none;
-        background-color: #15784B;
-        min-height: 100px;
-        max-height: 300px;
-        color: white;
-    }
-    textarea::placeholder{
-        color: #41B882;
-    }
-    .comment_footer{
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        align-items: flex-end;
-    }
-    .send_button{
-        margin: 2px 0 0 2px;
-        padding: 2px;
-        border-radius: 5px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        background-color: #478A6C;
-        color: #41B882;
-        cursor: pointer;
-    }
-    .send_button:hover{
-        color:#98E752 ;
-        box-shadow:0 0 0 1px #98E752 ;
-    }
-    .send_icon{
-        height: 26px;
-        width: 26px;
-        background-size: cover;
-        background-image: url(@/img/send.png);
-    }
+    <style>
     *{
-        font-family: Arial, Helvetica, sans-serif;
+        border:border-box;
+        margin: 0;
+        padding: 0;
+    }
+    .content{
+        padding: 100px 0 0 0;
     }
     </style>

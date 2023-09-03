@@ -17,14 +17,15 @@
         export default{
             data(){
                 return{
-                    Content:"123"
+                    name:'comment-input',
+                    Content:""
                 }
-            },
+            } /*,
             methods:{
                 inputContent(event){
                     this.Content = event.target.value;
                 }
-            }
+            }*/
         }
         </script>
         
