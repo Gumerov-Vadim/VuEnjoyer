@@ -3,7 +3,7 @@
         <div class="comment_header">
             Оставьте комментарий!
         </div>
-        <textarea v-bind:value="Content" @input="inputContent" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
+        <textarea v-bind:value="comment.comment_content" @input="inputContent" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
         <div class="comment_footer">
             <div class="send_button">
                 <div class="send_text">Отправить!</div>
@@ -19,14 +19,14 @@
                
                 return{
                     name:'comment-input',
-                    Content:""
+                    comment: {id:Date(),comment_author:"Ваше имя!",comment_content:"",isLiked:false,like_counter:0}
                 }
-            } /*,
+            } ,
             methods:{
                 inputContent(event){
-                    this.Content = event.target.value;
+                    this.comment.comment_content = event.target.value;
                 }
-            }*/
+            }
         }
         </script>
         
