@@ -16,6 +16,7 @@
         <script>
         export default{
             data(){
+               
                 return{
                     name:'comment-input',
                     Content:""

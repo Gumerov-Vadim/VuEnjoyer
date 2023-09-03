@@ -1,16 +1,18 @@
 <template>
-    <div class="comment">
+    <div>
+    <ul v-for="com in comments">
+    <li class="comment">
         <div class="comment_author">
             <div class="user">
                 <div class="avatar"></div>
-                <div class="name">Lorem, ipsum.</div>
+                <div class="name">{{ com.comment_author }}</div>
             </div>
         </div>
-        <div class="comment_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, modi.</div>
+        <div class="comment_content">{{com.comment_content}}</div>
         <div class="comment_rating">
             <div class="reply">Ответить</div>
             <div class="rating">
-                <div class="like_counter">{{like_counter}}</div>
+                <div class="like_counter">{{com.like_counter}}</div>
                 <div @click="LikeClicked" class="like_button">
                 <div v-if="!isLiked" class="like white_like"></div>
                 <div v-else class="like green_like"></div>
@@ -18,17 +20,17 @@
             </div>
         </div>
        
+    </li>
+    </ul>
     </div>
 </template>
 
 <script>
 export default{
-    data(){
-        return{
-            name:'comment',
-            isLiked:false,
-            like_counter:10
-        }
+    props:{
+        comments:{
+        type: Array,
+        required:true}
     },
     methods:{
         LikeClicked(){
