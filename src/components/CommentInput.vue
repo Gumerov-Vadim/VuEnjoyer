@@ -6,7 +6,7 @@
         <textarea v-model="comment.comment_content" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
         <div class="comment_footer">
             <div class="send_button">
-                <div class="send_text">Отправить!</div>
+                <div @click="sendComment" class="send_text">Отправить!</div>
                 <div class="send_icon"></div>
             </div>
         </div>
@@ -19,8 +19,25 @@
                
                 return{
                     name:'comment-input',
-                    comment: {id:Date(),comment_author:"Ваше имя!",comment_content:"",isLiked:false,like_counter:0}
+                    comment: {
+                        comment_author:"Ваше имя!",
+                        comment_content:"",
+                        isLiked:false,
+                        like_counter:0
+                    }
                 }
+            },
+            methods:{
+                sendComment(){
+                    this.comment.id=Date.now();
+                    this.$emit('send',this.comment);
+                    this.comment={
+                        comment_author:"Ваше имя!",
+                        comment_content:"",
+                        isLiked:false,
+                        like_counter:0
+                    }
+                    }
             }
         }
         </script>

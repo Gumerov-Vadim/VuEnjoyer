@@ -13,8 +13,8 @@
             <div class="reply">Ответить</div>
             <div class="rating">
                 <div class="like_counter">{{com.like_counter}}</div>
-                <div @click="LikeClicked" class="like_button">
-                <div v-if="!isLiked" class="like white_like"></div>
+                <div @click="LikeClicked(com)" class="like_button">
+                <div v-if="!com.isLiked" class="like white_like"></div>
                 <div v-else class="like green_like"></div>
                 </div>
             </div>
@@ -33,14 +33,14 @@ export default{
         required:true}
     },
     methods:{
-        LikeClicked(){
-            if(this.isLiked===true){
-                this.like_counter--;
-                this.isLiked=false;
+        LikeClicked(com){
+            if(com.isLiked===true){
+               com.like_counter--;
+                com.isLiked=false;
             }
             else{
-                this.like_counter++;
-                this.isLiked=true;
+                com.like_counter++;
+                com.isLiked=true;
             }
         }
     }
