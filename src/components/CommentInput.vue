@@ -15,6 +15,11 @@
         
         <script> 
         export default{
+            props:{
+                replylist:{
+                    Array
+                }
+            },
             data(){
                
                 return{
@@ -24,13 +29,14 @@
                         comment_content:"",
                         isLiked:false,
                         like_counter:0
-                    }
+                    },
+                    propinit:this.replylist
                 }
             },
             methods:{
                 sendComment(){
                     this.comment.id=Date.now();
-                    this.$emit('send',this.comment);
+                    this.$emit('send',this.comment,this.propinit);
                     this.comment={
                         comment_author:"Ваше имя!",
                         comment_content:"",

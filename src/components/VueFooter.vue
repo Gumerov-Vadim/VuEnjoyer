@@ -47,7 +47,6 @@ footer{
     background-color: #164B70;
     color:#4481AD;
     font-size: 300%;
-    padding-left: 20px;
     display: flex;
     align-items: center;
     flex-direction: row;

@@ -2,15 +2,17 @@
     <div class="app">
        <vu-enjoyer-header/>
        <div class="content">
-        <comment-input v-on:send="sendComment"/>
+        <about/>
+        <comment-input v-bind:replylist="comments" v-on:send="sendComment"/>
          
         <comment v-bind:comments="comments"/>
-        <vue-footer/>
         </div>
+        <vue-footer/>
     </div>
 </template>
     
     <script>
+    import About from "@/components/About.vue"
     import Comment from "@/components/Comment.vue"
     import CommentInput from "@/components/CommentInput.vue"
     import VuEnjoyerHeader from "@/components/VuEnjoyerHeader.vue"
@@ -18,7 +20,7 @@
 // import { pushScopeId } from "vue"
     export default{
         components:{
-            Comment,CommentInput,VuEnjoyerHeader,VueFooter
+            Comment,CommentInput,VuEnjoyerHeader,VueFooter,About
         },
         data(){
             return{
@@ -32,9 +34,9 @@
             }
         },
         methods:{
-            sendComment(comment){
+            sendComment(comment,comment_list){
                 
-                this.comments.push(comment);
+                comment_list.push(comment);
             }
             // inputContent(event){
             //     console.log(event);
@@ -51,6 +53,7 @@
         padding: 0;
     }
     .content{
-        padding: 100px 0 0 0;
+        padding: 100px 100px 0 100px;
     }
+
     </style>

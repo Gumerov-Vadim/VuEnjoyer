@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <comment-input v-on:send="SendReply" v-if="com.isReplyClicked" class="reply_field"/>
+        <comment-input v-bind:replylist="com.replylist" v-on:send="SendReply" v-if="com.isReplyClicked" class="reply_field"/>
         <comment v-bind:comments="com.replylist"></comment>
     </li>
     </ul>
@@ -60,8 +60,13 @@ export default{
             }
 
         },
-        SendReply(com){}
-    }
+        SendReply(com,replylist){
+                if(!com.replylist){
+                    com.replylist=[];
+                }
+                replylist.push(com);
+               }
+            }
 }
 </script>
 
