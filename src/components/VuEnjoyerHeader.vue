@@ -31,6 +31,7 @@
         background-color: #41B882;
         display: inline-flex;
         align-items: flex-end;
+        z-index: 666;
     }
     .logo{
         height: 100%;

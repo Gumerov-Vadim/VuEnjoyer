@@ -3,7 +3,7 @@
         <div class="comment_header">
             Оставьте комментарий!
         </div>
-        <textarea v-model="comment.comment_content" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
+        <textarea @keypress.enter="sendComment" v-model="comment.comment_content" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
         <div class="comment_footer">
             <div class="send_button">
                 <div @click="sendComment" class="send_text">Отправить!</div>
@@ -13,7 +13,7 @@
     </div>   
     </template>
         
-        <script>
+        <script> 
         export default{
             data(){
                
@@ -47,7 +47,6 @@
             color: white;
             display: flex;
             flex-direction: column;
-            width: 600px;
             padding: 10px;
             background-color: #41B882;
         }
