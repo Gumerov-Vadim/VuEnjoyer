@@ -4,7 +4,7 @@
     <div class="menu">
     <div class="site_name">uEnjoyer</div>
         <div class="menu_button" v-for="button in buttons">
-            <a href='{{ button.href }}'>{{ button.name }}</a>
+            <a :href='button.href'>{{ button.name }}</a>
         </div>
     </div>
     </header>
