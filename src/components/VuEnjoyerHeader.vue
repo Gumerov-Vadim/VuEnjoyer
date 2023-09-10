@@ -25,6 +25,7 @@
     
     <style scoped>
     header{
+        top:0;
         position: fixed;
         width: 100%;
         height: 100px;
@@ -32,6 +33,7 @@
         display: inline-flex;
         align-items: flex-end;
         z-index: 666;
+        border-bottom: 1px solid #41B882;
     }
     .logo{
         height: 100%;

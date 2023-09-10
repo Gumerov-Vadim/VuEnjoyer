@@ -11,8 +11,12 @@
 
 <style>
 #about{
+    padding: 50px 100px 50px 100px;
+    color: #41B882;
+    background-color: #35495e;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 48px;
-
+    font-style: oblique;
+    text-shadow: 2px 2px 0px rgba(255,255,255,1.0);
 }
 </style>
