@@ -10,8 +10,10 @@
         </div>
         <div class="comment_content">{{com.body}}</div>
         <div class="comment_rating">
+            <div class="comment_button">
+            <div @click="ReplyShowClicked(com)" class="show_reply_button">Показать {{ com.reply_counter }}</div>
             <div @click="ReplyClicked(com)" class="reply">Ответить</div>
-            <div class="reply_list"></div>
+            </div>
             <div class="rating">
                 <div class="like_counter">{{com.like_counter}}</div>
                 <div @click="LikeClicked(com)" class="like_button">
@@ -21,7 +23,7 @@
             </div>
         </div>
         <comment-input v-bind:replylist="com.replylist" v-on:send="SendReply" v-if="com.isReplyClicked" class="reply_field"/>
-        <comment v-bind:propcomments="com.replylist"></comment>
+        <comment class="reply_list" v-show="com.IsReplyShow" v-bind:propcomments="com.replylist"></comment>
     </li>
     </ul>
     </div>
@@ -47,6 +49,11 @@ export default{
         }
     },
     methods:{
+        ReplyShowClicked(com){
+          com.IsReplyShow = !com.IsReplyShow;
+          com.reply_counter = this.CommentsCount(com.replylist);
+           
+        },
         LikeClicked(com){
             if(com.isLiked===true){
                com.like_counter--;
@@ -58,28 +65,43 @@ export default{
             }
         },
         ReplyClicked(com){
-            if(com.isReplyClicked===true){
-                com.isReplyClicked=false;
-            }
-            else{
-                com.isReplyClicked=true;
-            }
+           com.isReplyClicked=!com.isReplyClicked;
             this.$emit('open',com,this.comments);
-
+            this.updateReplyCount();
         },
         SendReply(com,replylist){
                 if(!com.replylist){
                     com.replylist=[];
                 }
                 replylist.push(com);
-               }
+               },
+        CommentsCount(com_list){
+            let length = 0;
+            length += com_list.length;
+            com_list.forEach(com => {
+                if(com.replylist){
+                length+=this.CommentsCount(com.replylist);
+            }
+            });
+            return length;
             },
+        updateReplyCount(){
+            this.$nextTick(()=>{
+            this.comments.forEach(com=>{
+               com.reply_counter = this.CommentsCount(com.replylist); 
+            })
+            });
+        }
+        },
         watch: {
             propcomments(newVal) {
+                //инициализация комментариев
                 this.comments = newVal;
                 this.comments.forEach(com => {
                     if(!com.like_counter){com.like_counter = 0;}
                     if(!com.replylist){com.replylist=[];}
+                //    com.reply_counter = this.CommentsCount(com.replylist);
+                
                 });
             }
         }
@@ -92,13 +114,14 @@ export default{
     padding: 0;
     box-sizing: border-box;
 }
+
 .comment{
     border:#9d9 5px solid;
     /* margin: 15px; */
     padding: 10px;
-    min-width:300px;
+    min-width:420px;
     width: max-content;
-    max-width: 600px;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     background-color: rgb(66, 66, 66);
@@ -107,6 +130,11 @@ export default{
 .comment_author{
     border-bottom:#9d9 1px solid;
     font-size: 28px;
+}
+.comment_button{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
 }
 .comment_rating{
     height: 50px;
@@ -137,6 +165,7 @@ export default{
     flex-direction: column-reverse;
     cursor: pointer;
     user-select: none;
+    margin: 0 0 0 65px;
 }
 .reply::after{
     content: "";
@@ -148,7 +177,24 @@ export default{
     right: -40px;
     bottom: 0px;
 }
+.show_reply_button{
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    cursor: pointer;
+    user-select: none;
+}
+.show_reply_button::after{
+    content: "";
+    position: absolute;
+    background-image: url(@/img/show_reply.png);
+    background-size: 35px 35px;
+    height: 35px;
+    width: 35px;
+    right: -40px;
+    bottom: 0px;
 
+}
 .rating{
     display: flex;
     align-items: flex-end;

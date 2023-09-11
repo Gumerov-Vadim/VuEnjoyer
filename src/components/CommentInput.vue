@@ -27,8 +27,10 @@
                     comment: {
                         name:"Ваше имя!",
                         body:"",
+                        IsReplyShow:true,
+                        reply_counter:0,
                         isLiked:false,
-                        like_counter:0
+                        like_counter:0,
                     },
                     propinit:this.replylist
                 }
@@ -40,6 +42,8 @@
                     this.comment={
                         name:"Ваше имя!",
                         body:"",
+                        IsReplyShow:true,
+                        reply_counter:0,
                         isLiked:false,
                         like_counter:0
                     }
