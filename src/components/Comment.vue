@@ -67,14 +67,14 @@ export default{
         ReplyClicked(com){
            com.isReplyClicked=!com.isReplyClicked;
             this.$emit('open',com,this.comments);
-            this.updateReplyCount();
         },
         SendReply(com,replylist){
                 if(!com.replylist){
                     com.replylist=[];
                 }
                 replylist.push(com);
-               },
+                this.updateReplyCount();
+                },
         CommentsCount(com_list){
             let length = 0;
             length += com_list.length;
@@ -101,7 +101,7 @@ export default{
                     if(!com.like_counter){com.like_counter = 0;}
                     if(!com.replylist){com.replylist=[];}
                 //    com.reply_counter = this.CommentsCount(com.replylist);
-                
+                this.updateReplyCount();
                 });
             }
         }
