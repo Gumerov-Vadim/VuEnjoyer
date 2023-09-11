@@ -3,7 +3,7 @@
         <div class="comment_header">
             Оставьте комментарий!
         </div>
-        <textarea @keypress.enter="sendComment" v-model="comment.comment_content" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
+        <textarea @keypress.enter="sendComment" v-model="comment.body" name="comment_field" id="comment_field" cols="30" rows="10" placeholder="Напишите, что вы думаете..." ></textarea>
         <div class="comment_footer">
             <div class="send_button">
                 <div @click="sendComment" class="send_text">Отправить!</div>
@@ -25,8 +25,8 @@
                 return{
                     name:'comment-input',
                     comment: {
-                        comment_author:"Ваше имя!",
-                        comment_content:"",
+                        name:"Ваше имя!",
+                        body:"",
                         isLiked:false,
                         like_counter:0
                     },
@@ -38,8 +38,8 @@
                     this.comment.id=Date.now();
                     this.$emit('send',this.comment,this.propinit);
                     this.comment={
-                        comment_author:"Ваше имя!",
-                        comment_content:"",
+                        name:"Ваше имя!",
+                        body:"",
                         isLiked:false,
                         like_counter:0
                     }

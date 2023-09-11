@@ -3,9 +3,9 @@
        <vu-enjoyer-header/>
        <about/>
        <div class="comment_box">
-        <comment-input v-bind:replylist="comments" v-on:send="sendComment"/>
+        <comment-input v-bind:replylist="this.comments" v-on:send="sendComment"/>
          
-        <comment v-bind:comments="comments"/>
+        <comment v-bind:propcomments="this.comments"/>
         </div>
         <vue-footer/>
     </div>
@@ -17,6 +17,7 @@
     import CommentInput from "@/components/CommentInput.vue"
     import VuEnjoyerHeader from "@/components/VuEnjoyerHeader.vue"
     import VueFooter from "@/components/VueFooter.vue"
+    import axios from "axios"
 // import { pushScopeId } from "vue"
     export default{
         components:{
@@ -25,10 +26,10 @@
         data(){
             return{
                 comments:[
-                    {id:0,comment_author:"Lorem ipsum",comment_content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, laudantium.",isReplyClicked:false,replylist:[{id:5,comment_author:"Vasya",comment_content:"Первый!",isReplyClicked:false,replylist:[],isLiked:false,like_counter:10}],isLiked:false,like_counter:10},
-                    {id:1,comment_author:"Aperiam perspiciatis",comment_content:"Possimus enim cupiditate ab omnis reiciendis, incidunt obcaecati ducimus officiis culpa aperiam illum rem eum ea earum sint quis nisi laborum et mollitia? Iste nostrum accusamus asperiores sequi, quae id!",isReplyClicked:false,replylist:[],isLiked:true,like_counter:50},
-                    {id:2,comment_author:"Exercitationem explicabo",comment_content:"Dolor sit amet consectetur adipisicing elit.",isReplyClicked:false,replylist:[],isLiked:false,like_counter:8},
-                    {id:3,comment_author:"Cumque Ullam",comment_content:"amet quia assumenda officia molestiae sed, rerum hic iure. Nulla ad amet, inventore vero voluptatem a.",isReplyClicked:false,replylist:[],isLiked:false,like_counter:5}
+                    // {id:0,comment_author:"Lorem ipsum",comment_content:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, laudantium.",isReplyClicked:false,replylist:[{id:5,comment_author:"Vasya",comment_content:"Первый!",isReplyClicked:false,replylist:[],isLiked:false,like_counter:10}],isLiked:false,like_counter:10},
+                    // {id:1,comment_author:"Aperiam perspiciatis",comment_content:"Possimus enim cupiditate ab omnis reiciendis, incidunt obcaecati ducimus officiis culpa aperiam illum rem eum ea earum sint quis nisi laborum et mollitia? Iste nostrum accusamus asperiores sequi, quae id!",isReplyClicked:false,replylist:[],isLiked:true,like_counter:50},
+                    // {id:2,comment_author:"Exercitationem explicabo",comment_content:"Dolor sit amet consectetur adipisicing elit.",isReplyClicked:false,replylist:[],isLiked:false,like_counter:8},
+                    // {id:3,comment_author:"Cumque Ullam",comment_content:"amet quia assumenda officia molestiae sed, rerum hic iure. Nulla ad amet, inventore vero voluptatem a.",isReplyClicked:false,replylist:[],isLiked:false,like_counter:5}
                 
                 ]
             }
@@ -38,12 +39,26 @@
                 if(!comment.replylist){
                     comment.replylist=[];
                 }
-                comment_list.push(comment);
+                this.comments.push(comment);
+               // comment_list.push(comment);
+            },
+            async fetchComments(){
+                try{
+                    const response = await axios.get("https://jsonplaceholder.typicode.com/comments?_limit=10");
+                    this.comments = response.data;
+                    console.log(response);
+                }
+                catch(e){
+                    console.log("ошибка при загрузке комментариев");
+                }
             }
             // inputContent(event){
             //     console.log(event);
             //     this.Content = event.target.value;
             // }
+        },
+        mounted(){
+            this.fetchComments();
         }
     }
     </script>

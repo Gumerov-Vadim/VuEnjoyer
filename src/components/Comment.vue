@@ -1,14 +1,14 @@
 <template>
     <div>
     <ul>
-    <li v-for="com in comments" class="comment">
+    <li v-for="com in propcomments" class="comment">
         <div class="comment_author">
             <div class="user">
                 <div class="avatar"></div>
-                <div class="name">{{ com.comment_author }}</div>
+                <div class="name">{{ com.name }}</div>
             </div>
         </div>
-        <div class="comment_content">{{com.comment_content}}</div>
+        <div class="comment_content">{{com.body}}</div>
         <div class="comment_rating">
             <div @click="ReplyClicked(com)" class="reply">Ответить</div>
             <div class="rating">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <comment-input v-bind:replylist="com.replylist" v-on:send="SendReply" v-if="com.isReplyClicked" class="reply_field"/>
-        <comment v-bind:comments="com.replylist"></comment>
+        <comment v-bind:propcomments="com.replylist"></comment>
     </li>
     </ul>
     </div>
@@ -36,9 +36,14 @@ export default{
         },
     
     props:{
-        comments:{
+        propcomments:{
         type: Array,
         required:true}
+    },
+    data(){
+        return{
+            comments:this.propcomments
+        }
     },
     methods:{
         LikeClicked(com){
@@ -66,8 +71,17 @@ export default{
                 }
                 replylist.push(com);
                }
+            },
+        watch: {
+            propcomments(newVal) {
+                this.comments = newVal;
+                this.comments.forEach(com => {
+                    if(!com.like_counter){com.like_counter = 0;}
+                    if(!com.replylist){com.replylist=[];}
+                });
             }
-}
+        }
+        }
 </script>
 
 <style scoped>
