@@ -11,6 +11,7 @@
         <div class="comment_content">{{com.body}}</div>
         <div class="comment_rating">
             <div @click="ReplyClicked(com)" class="reply">Ответить</div>
+            <div class="reply_list"></div>
             <div class="rating">
                 <div class="like_counter">{{com.like_counter}}</div>
                 <div @click="LikeClicked(com)" class="like_button">
@@ -63,6 +64,7 @@ export default{
             else{
                 com.isReplyClicked=true;
             }
+            this.$emit('open',com,this.comments);
 
         },
         SendReply(com,replylist){

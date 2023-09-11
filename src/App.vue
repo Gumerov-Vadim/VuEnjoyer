@@ -5,7 +5,7 @@
        <div class="comment_box">
         <comment-input v-bind:replylist="this.comments" v-on:send="sendComment"/>
          
-        <comment v-bind:propcomments="this.comments"/>
+        <comment v-on:open="closeReplyDialogs" v-bind:propcomments="this.comments"/>
         </div>
         <vue-footer/>
     </div>
@@ -46,11 +46,27 @@
                 try{
                     const response = await axios.get("https://jsonplaceholder.typicode.com/comments?_limit=10");
                     this.comments = response.data;
-                    console.log(response);
                 }
                 catch(e){
                     console.log("ошибка при загрузке комментариев");
                 }
+            },
+            closeReplyDialogs(com,com_list){
+                
+                com_list.forEach(comment => {
+                    if(comment!=com){
+                        comment.isReplyClicked = false;
+                    }
+                    else{
+                        // console.log(com.isReplyClicked);
+                        // if(!com.isReplyClicked){com.isReplyClicked=true; console.log(1);}
+                        // else{com.isReplyClicked = false;console.log(2);
+                        // console.log(com.isReplyClicked);}
+                        // //comment.isReplyClicked = !comment.isReplyClicked?true:false;
+                    }
+                    if(comment.replylist!=[]&&!comment.replylist){this.closeReplyDialogs(com,com_list.replylist);
+                    }
+                });
             }
             // inputContent(event){
             //     console.log(event);
